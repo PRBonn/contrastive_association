@@ -1,0 +1,44 @@
+EXPERIMENT:
+    ID: CA-Net
+
+DATA_CONFIG:
+    DATASET_NAME: KittiInstanceFeatures
+    DATASET_PATH: ../cont_assoc/data/2instance_features
+    VAL_PRED_PATH: ../cont_assoc/data/2validation_predictions
+    CONFIG_FILE: ../cont_assoc/datasets/semantic-kitti.yaml
+    DATALOADER:
+        AUGMENTATION:
+            DO_AUG: True
+            JITTER: True
+            POINTS: False
+            PLANE: True
+            CUBOIDS: True
+            CONTOUR: True
+        SHUFFLE: True
+        DATA_DIM: 128
+        NUM_WORKER: 6
+
+TRAIN:
+    MAX_EPOCH: 100
+    BATCH_SIZE: 4
+    POS_SCANS: 2 # seq_lenght = 2*pos_scans + 1
+    RANDOM_POS_SCANS: True
+    N_GPUS: 1
+    LR: 0.005
+    CONTRASTIVE_TEMP: 0.1
+    SCHEDULER:
+        #CosineAnnealingLR
+        DIV_FACTOR: 1000
+
+MODEL:
+    NAME: ContrastiveTracking
+    ENCODER:
+        OUTPUT_DIM: 1024
+        NAME: sparse
+        CHANNELS: [1, 2, 4, 8] #128, 256, 512, 1024
+    USE_POSES: True
+
+TRACKING:
+    #distance, feature sim
+    ASSOCIATION_WEIGHTS: [0.7, 0.4]
+    ASSOCIATION_THRESHOLDS: [2, 0.2]

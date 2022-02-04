@@ -1,0 +1,45 @@
+##Experiment
+EXPERIMENT:
+    ID: panoptic_cylinder
+
+##Datasets
+DATA_CONFIG:
+    DATASET_NAME: SemanticKitti
+    DATASET_PATH: ../cont_assoc/data/kitti/
+    CONFIG_FILE: ../cont_assoc/datasets/semantic-kitti.yaml
+    NCLASS: 20
+    DATALOADER:
+        VOXEL_TYPE: Spherical
+        GRID_SIZE: [480, 360, 32]
+        SHUFFLE: True
+        IGNORE_LABEL: 255
+        CONVERT_IGNORE_LABEL: 0
+        FIXED_VOLUME_SPACE: True
+        MAX_VOLUME_SPACE: [50, 'PI', 1.5]
+        MIN_VOLUME_SPACE: [3, '-PI', -3]
+        CENTER_TYPE: Axis_center
+        DATA_DIM: 9
+        NUM_WORKER: 2
+
+EVAL:
+    BATCH_SIZE: 2
+    N_GPUS: 1
+
+##Network
+MODEL:
+    NAME: PanopticCylinder
+    VOXEL_FEATURES:
+        NAME: PointNet
+        OUT_DIM: 64
+        FEATURE_DIM: 16
+        MAX_PT_PER_ENCODE: 256
+    BACKBONE:
+        NAME: CylinderBackbone
+        INIT_SIZE: 32
+    SEM_HEAD:
+        NAME: CylinderSemanticHead
+    INS_HEAD:
+        NAME: CylinderInstanceHead
+        EMBEDDING_CHANNEL: 3
+    POST_PROCESSING:
+        BANDWIDTH: 1.2

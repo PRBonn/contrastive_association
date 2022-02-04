@@ -1,0 +1,14 @@
+#MinkowskiEngine==0.5.4                                                          
+PyYAML==6.0                                                                     
+click==7.1.2                                                                    
+easydict==1.9                                                                   
+filterpy==1.4.5                                                                 
+numba==0.49.1                                                                   
+numpy==1.19.5                                                                   
+pytorch_lightning==1.5.9                                                        
+scikit_learn==1.0.2 
+scipy==1.5.0                                                                    
+#spconv==1.2.1                                                                   
+torch==1.9.0                                                                    
+torch_scatter==2.0.5
+tqdm==4.48.2                                                                    
