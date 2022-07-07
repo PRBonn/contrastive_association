@@ -63,8 +63,8 @@ class PS4D(LightningModule):
 
         if len(coordinates) != len(ins_ids):
             #scans without instances
-            new_feats, new_coors, new_coors_T = cont.fix_batches(ins_ids, features, coordinates, coordinates_T)
-            tracking_input = {'pt_features':new_feats,'pt_coors':new_coors, 'pt_coors_T':new_coors_T}
+            new_feats, new_coors = cont.fix_batches(ins_ids, features, coordinates)
+            tracking_input = {'pt_features':new_feats,'pt_coors':new_coors}
 
         return ins_feat, n_instances, ins_ids, ins_pred, tracking_input
 
